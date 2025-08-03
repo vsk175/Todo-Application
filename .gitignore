@@ -1,0 +1,2 @@
+# Ignore frontend node_modules
+/frontend/todo-app/node_modules/
