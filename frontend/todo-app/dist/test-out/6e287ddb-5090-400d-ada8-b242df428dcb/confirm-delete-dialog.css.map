@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/confirm-delete-dialog/confirm-delete-dialog.css"],
+  "sourcesContent": [".dialog-actions {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  gap: 0.5rem;\r\n}"],
+  "mappings": ";AAAA,CAAC;AACC,WAAS;AACT,mBAAiB;AACjB,OAAK;AACP;",
+  "names": []
+}

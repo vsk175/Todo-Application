@@ -1,0 +1,58 @@
+<div class="todo-container">
+  <div class="title-row">
+  <mat-icon class="title-icon" color="primary">list_alt</mat-icon>
+  <h2 class="title-text" color="primary">TODO APP</h2>
+</div>
+
+  <!-- Add Todo Item -->
+  <div class="add-task">
+    <mat-form-field class="task-input" appearance="outline">
+      <mat-label>Add New Task</mat-label>
+      <input matInput [(ngModel)]="newTaskTitle"  [disabled]="!backendAvailable" (keyup.enter)="addTodoItem()" />
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="addTodoItem()" [disabled]="!newTaskTitle.trim() || !backendAvailable" aria-label="Add">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+
+  <ul class="todo-list">
+      <li *ngFor="let todo of todos" class="todo-item">
+    <!-- Edit Todo Item View Mode -->
+    <div *ngIf="editingTodoId === todo.id; else viewMode" class="edit-row">
+      <input [(ngModel)]="updatedTitle" (keyup.enter)="saveEdit(todo)" class="edit-input" />
+      <button mat-icon-button color="primary" (click)="saveEdit(todo)">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="cancelEdit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Normal View Mode -->
+    <ng-template #viewMode>
+      <span>{{ todo.title }}</span>
+      <div>
+        <button mat-icon-button color="primary" (click)="startEdit(todo)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="confirmAndDelete(todo)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </ng-template>
+  </li>
+  </ul>
+
+ <!-- Empty Todo List -->
+<div *ngIf="todos.length === 0" class="no-todos">
+  <div class="title-row">
+    <h4>No tasks yet. Add some to get started!</h4>
+  </div>
+</div>
+
+<!-- Backend Not Reachable -->
+<div *ngIf="!backendAvailable" class="error">
+  Backend not reachable. Please try again later.
+</div>
+
+</div>
